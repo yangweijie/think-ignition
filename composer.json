@@ -1,0 +1,36 @@
+{
+    "name": "yangweijie\/think-ignition",
+    "description": "ignition for ThinkPHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "yangweijie",
+            "email": "917647288@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "topthink/framework": "^6.0 | ^6.1 | ^8.0",
+        "spatie/ignition": "^1.11",
+    },
+    "autoload": {
+        "psr-4": {
+            "think\\ignition\\": "src"
+        },
+    },
+    "support": {
+        "email": "917647288@qq.com"
+    },
+    "extra": {
+        "think": {
+            "config": {
+                "ignition": "config/config.php"
+            }
+        }
+    },
+    "scripts":{
+        "post-autoload-dump": [
+            "think\\ignition\\Install::config"
+        ]
+    }
+}
