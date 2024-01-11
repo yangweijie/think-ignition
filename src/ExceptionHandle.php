@@ -51,13 +51,17 @@ class ExceptionHandle extends Handle
     public function render($request, Throwable $e): Response
     {
         // 添加自定义异常处理机制
-        if($request->isAjax() || $request->isOption()){
+        if($request->isAjax() || $request->isOptions()){
             // 其他错误交给系统处理
             return parent::render($request, $e);
         }else{
-            // 添加自定义异常处理机制
-            $html = $this->app->get('ignition')->handleException($e);
-            return \response($html);
+            if($this->app->ignition){
+                // 添加自定义异常处理机制
+                $html = $this->app->ignition->handleException($e);
+                return \response($html);
+            }else{
+                return parent::render($request, $e);
+            }
         }
     }
 }

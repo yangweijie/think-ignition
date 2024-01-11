@@ -1,8 +1,9 @@
 <?php
 declare (strict_types = 1);
 
-namespace think\ignition\service;
+namespace think\ignition;
 
+use think\facade\Config;
 class IgnitionService extends \think\Service
 {
     /**
@@ -12,7 +13,7 @@ class IgnitionService extends \think\Service
      */
     public function register()
     {
-    	//
+        $this->app->bind('ignition', \Spatie\Ignition\Ignition::class);
     }
 
     /**
@@ -22,11 +23,12 @@ class IgnitionService extends \think\Service
      */
     public function boot()
     {
-
-        $this->app->bind('ignition', \Spatie\Ignition\Ignition::make()
+        $config = Config::get('ignition');
+        $this->app->ignition
             ->applicationPath($this->app->getBasePath())
-            ->theme(config('ignition.useDarkMode', false) ? 'dark' : 'light')
-            ->setEditor(config('ignition.editor'))
-            ->register());
+            ->theme($config['useDarkMode']?'dark':'light')
+            ->shouldDisplayException(Config::get('app.show_error_msg'))
+            ->setEditor($config['editor'])
+            ->register();
     }
 }
