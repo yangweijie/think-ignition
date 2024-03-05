@@ -26,9 +26,9 @@ class IgnitionService extends \think\Service
         $config = Config::get('ignition');
         $this->app->ignition
             ->applicationPath($this->app->getBasePath())
-            ->theme($config['useDarkMode']?'dark':'light')
+            ->theme(Config::get('ignition.useDarkMode', false)?'dark' : 'light')
             ->shouldDisplayException(Config::get('app.show_error_msg'))
-            ->setEditor($config['editor'])
+            ->setEditor(Config::get('ignition.editor', ''))
             ->register();
     }
 }
