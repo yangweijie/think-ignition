@@ -17,3 +17,9 @@ return [
 ];
 ~~~
 
+将 app.show_error_msg  设为 true
+
+~~~
+// 显示错误信息
+'show_error_msg'   => true,
+~~~
